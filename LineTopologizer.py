@@ -20,17 +20,13 @@ ghenv.Component.Name = "Line_Topologizer"
 ghenv.Component.NickName = 'LineTopo'
 
 
-def pythonListTGhDataTree(pythonList, listType):
-    
+def PythonListTGhDataTree(pythonList, listType):
     """ Converts a nested Python list to a GH datatree. """
-    
     import Grasshopper as gh
-    
     dataTree = gh.DataTree[listType]()
     for i in range(len(pythonList)):
         for j in pythonList[i]:
             dataTree.Add(j,gh.Kernel.Data.GH_Path(i))
-            
     return dataTree
 
 def PtCloudFromPoints(Points, T):
@@ -132,10 +128,10 @@ class LineTopologizer:
 P  = LineTopologizer(L, T).OrderedListOfPoints()
 
 LP = LineTopologizer(L, T).LineToPoints_Structure()
-LP_gh = pythonListTGhDataTree(LP,int) # Grasshopper datatree output
+LP_gh = PythonListTGhDataTree(LP,int) # Grasshopper datatree output
 
 PP = LineTopologizer(L, T).PointToPoints_Structure()
-PP_gh = pythonListTGhDataTree(PP,int) # Grasshopper datatree output
+PP_gh = PythonListTGhDataTree(PP,int) # Grasshopper datatree output
 
 PL = LineTopologizer(L, T).PointToLines_Structure()
-PL_gh = pythonListTGhDataTree(PL, rg.Line) # Grasshopper datatree output
+PL_gh = PythonListTGhDataTree(PL, rg.Line) # Grasshopper datatree output
